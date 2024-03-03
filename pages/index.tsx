@@ -3,7 +3,8 @@ import { Inter } from "next/font/google";
 import {BsBell, BsBookmark, BsEnvelope, BsTwitter } from 'react-icons/bs';
 import{BiHash, BiHomeCircle, BiUser} from 'react-icons/bi'
 import FeedCard from "@/components/FeedCard";
-
+import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
+import { useCallback } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 interface TwitterSidebarButton{
@@ -43,6 +44,13 @@ const sideBarMenuItems:TwitterSidebarButton[]=[
 ]
 
 export default function Home() {
+
+
+  const handleLoginWithGoogle=useCallback((cred:CredentialResponse)=>{
+
+  },[]);
+
+
   return (
   <div className={inter.className}>
     <div className="grid grid-cols-12 h-screen w-screen pl-56 ">
@@ -69,7 +77,14 @@ export default function Home() {
       <div className="col-span-6 border-r-[1px] border-l-[1px] border-r-slate-500  border-l-slate-500">
         <FeedCard/>
       </div>
-      <div className="col-span-3"></div>
+      <div className="col-span-3">
+        <div className=" p-5 bg-slate-700 rounded-lg">
+          <h1 className="my-2 text-2xl">New to Twitter?</h1>
+          <GoogleLogin
+              onSuccess={(cred) => { console.log('Login success:', cred); }}   
+            />
+        </div>
+      </div>
     </div> 
   </div>
   );
